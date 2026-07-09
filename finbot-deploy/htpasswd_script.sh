@@ -1,0 +1,2 @@
+htpasswd -Bbn "$BASIC_AUTH_USER" "$BASIC_AUTH_PASS" > nginx.htpasswd
+

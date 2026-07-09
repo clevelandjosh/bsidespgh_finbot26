@@ -1,0 +1,15 @@
+# Dockerfile.proxy
+# Uses nginx + envsubst to substitute BACKEND_HOSTNAME at container start.
+FROM nginx:stable-alpine
+
+# Install envsubst (gettext) for runtime substitution
+RUN apk add --no-cache gettext
+
+# Copy template, htpasswd placeholder, and start script
+COPY nginx.conf.template /etc/nginx/nginx.conf.template
+COPY nginx.htpasswd /etc/nginx/.htpasswd
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+EXPOSE 8080
+CMD ["/start.sh"]
